@@ -1,0 +1,66 @@
+[
+  {
+    "id": "place.10902195899379460",
+    "title": "Algiers",
+    "longitude": 3.05861,
+    "latitude": 36.77639,
+    "lengthOfStay": 1,
+    "pois": []
+  },
+  {
+    "id": "place.10511444853937860",
+    "title": "Valencia",
+    "longitude": -0.375,
+    "latitude": 39.46667,
+    "lengthOfStay": 1,
+    "pois": []
+  },
+  {
+    "id": "place.8006288694167790",
+    "title": "Barcelona",
+    "longitude": 2.17694,
+    "latitude": 41.3825,
+    "lengthOfStay": 1,
+    "pois": []
+  },
+  {
+    "id": "place.6137063676036310",
+    "title": "Marseille",
+    "longitude": 5.37639,
+    "latitude": 43.29667,
+    "lengthOfStay": 1,
+    "pois": []
+  },
+  {
+    "id": "place.6673301784284540",
+    "title": "Porto Torres",
+    "longitude": 8.40139,
+    "latitude": 40.83694,
+    "lengthOfStay": 1,
+    "pois": []
+  },
+  {
+    "id": "place.9045806458813870",
+    "title": "Rome",
+    "longitude": 12.48278,
+    "latitude": 41.89306,
+    "lengthOfStay": 1,
+    "pois": []
+  },
+  {
+    "id": "place.14193182615257910",
+    "title": "Tunis",
+    "longitude": 10.18,
+    "latitude": 36.80083,
+    "lengthOfStay": 1,
+    "pois": []
+  },
+  {
+    "id": "place.17708981356990070",
+    "title": "Athens",
+    "longitude": 23.71667,
+    "latitude": 38,
+    "lengthOfStay": 1,
+    "pois": []
+  }
+]

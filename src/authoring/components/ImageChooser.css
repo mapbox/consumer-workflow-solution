@@ -1,0 +1,17 @@
+img.choosable-image {
+  margin: 4px 0 0;
+}
+
+.image-chooser {
+  position: absolute;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+  width: 50%;
+  max-width: 520px;
+  height: 50%;
+  overflow: hidden auto !important;
+}

@@ -1,0 +1,35 @@
+.map-container.fullscreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+.menu {
+  position: absolute;
+  width: 20em;
+  padding: 1em;
+  margin: 0 1em;
+  max-height: 90%;
+  overflow: hidden auto;
+}
+
+#root {
+  display: inline;
+}
+
+label {
+  margin-top: 1em;
+}
+
+.search-container {
+  z-index: 10;
+  position: relative;
+  margin-top: 0.5em;
+}
+
+.section {
+  padding-bottom: 1em;
+}

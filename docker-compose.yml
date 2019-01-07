@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  cms:
+    build:
+      context: ./mock_cms
+      dockerfile: Dockerfile
+    volumes:
+      - ./mock_cms/html:/var/www/html
+    ports:
+      - "8080:80"
+  # frontend app is not Dockerised because the slow performance
+  # of bind mounted volumes made development painful

@@ -1,0 +1,54 @@
+html {
+  overflow-y: scroll;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.stops {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  max-width: 40%;
+  /* background: #ccc; */
+  padding: 0 1em 1em 1em;
+}
+
+.map {
+  width: 100%;
+  height: 50vh;
+}
+
+.mapboxgl-popup-content {
+  /* Adjust popup properties */
+  padding: 8px;
+  max-width: 300px;
+  max-height: 240px;
+  overflow: auto;
+}
+
+.mapboxgl-popup-content h2 {
+  margin: 0.5em 0;
+}
+
+.mapboxgl-popup-content img {
+  width: 100%;
+}
+
+.stop-sidebar.focus {
+  text-decoration: underline;
+}
+
+.stop-sidebar {
+  cursor: pointer;
+}
