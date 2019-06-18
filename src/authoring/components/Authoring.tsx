@@ -78,7 +78,7 @@ export class AuthoringComponent extends PureComponent<Props, State> {
 
   async loadImages() {
     const host = "https://static-assets.mapbox.com/demos/travel/";
-    const json = require("../data/list.json");
+    const json = require("../data/destinationImageList.json");
     this.props.addImageSources(json.map((node: any) => host + node.filename));
   }
 
