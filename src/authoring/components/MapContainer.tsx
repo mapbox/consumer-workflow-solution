@@ -8,16 +8,17 @@ import { distance } from "@turf/turf";
 import { remap } from "../../utility/math";
 import { POI } from "../data/POI";
 import { addEmptyGeoJSONSource } from "../../utility/addEmptyGeoJSONSource";
+import { transformRequest } from "../../utility/transformRequest";
 
 export interface Props {
   accessToken: string;
   paths: FeatureCollection;
-  stops: FeatureCollection;
+  destinations: FeatureCollection;
   pois: FeatureCollection | null;
   selectedPois: Feature[];
   itineraryBounds: LngLatBounds;
   onMapCreated?: (map: mapboxgl.Map) => any; // called when the map is constructed
-  stopProperties: { [id: string]: DestinationProperties };
+  destinationProperties: { [id: string]: DestinationProperties };
   focalPoint?: [number, number];
   centerOnFocalPoint: boolean;
   onPOISelected: (poi: POI) => void;
@@ -60,7 +61,7 @@ export class MapContainer extends PureComponent<Props & React.HTMLAttributes<HTM
     const {
       accessToken,
       onMapCreated,
-      stopProperties: _,
+      destinationProperties: _,
       itineraryBounds,
       centerOnFocalPoint,
       focalPoint,
@@ -83,7 +84,8 @@ export class MapContainer extends PureComponent<Props & React.HTMLAttributes<HTM
     if (container !== null && searchContainer !== null) {
       const map = new mapboxgl.Map({
         container,
-        style: "mapbox://styles/mapbox/light-v9"
+        style: "mapbox://styles/mapbox/light-v9",
+        transformRequest
       });
 
       if (onMapCreated) {
@@ -199,7 +201,7 @@ export class MapContainer extends PureComponent<Props & React.HTMLAttributes<HTM
     });
 
     map.on("mouseenter", ITINERARY_STOP_LAYER, e => {
-      const { stopProperties } = this.props;
+      const { destinationProperties: stopProperties } = this.props;
       const feature: any = e.features![0];
       const coords = feature.geometry.coordinates.slice();
       const title = feature.properties.title;
@@ -223,15 +225,15 @@ export class MapContainer extends PureComponent<Props & React.HTMLAttributes<HTM
   }
 
   updateMap(prevProps: Props, prevState: State) {
-    const { paths, stops, pois, selectedPois, itineraryBounds, centerOnFocalPoint, focalPoint } = this.props;
+    const { paths, destinations, pois, selectedPois, itineraryBounds, centerOnFocalPoint, focalPoint } = this.props;
     const { map } = this.state;
     if (map) {
       const newMap = map !== prevState.map;
       if (paths !== prevProps.paths || newMap) {
         (map.getSource(ITINERARY_ROUTE_SOURCE) as GeoJSONSource).setData(paths);
       }
-      if (stops !== prevProps.stops || newMap) {
-        (map.getSource(ITINERARY_STOP_SOURCE) as GeoJSONSource).setData(stops);
+      if (destinations !== prevProps.destinations || newMap) {
+        (map.getSource(ITINERARY_STOP_SOURCE) as GeoJSONSource).setData(destinations);
       }
       let showPois = centerOnFocalPoint;
       if ((showPois && pois !== prevProps.pois) || newMap) {

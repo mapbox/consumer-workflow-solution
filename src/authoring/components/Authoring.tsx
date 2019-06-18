@@ -26,6 +26,7 @@ import debounce from "lodash.debounce";
 import { POI } from "../data/POI";
 import defaultItinerary from "../data/defaultItinerary.json";
 import { ThemeProvider } from "@material-ui/styles";
+import { uuid } from "../data/Identifier";
 
 export interface Props extends AuthorState {
   clearErrors: () => void;
@@ -78,7 +79,7 @@ export class AuthoringComponent extends PureComponent<Props, State> {
 
   async loadImages() {
     const host = "https://static-assets.mapbox.com/demos/travel/";
-    const json = require("../data/list.json");
+    const json = require("../data/destinationImageList.json");
     this.props.addImageSources(json.map((node: any) => host + node.filename));
   }
 
@@ -109,7 +110,7 @@ export class AuthoringComponent extends PureComponent<Props, State> {
         geocoder.on("result", ({ result }) => {
           geocoder.clear();
           addDestination(
-            { id: result.id, title: result.text, longitude: result.center[0], latitude: result.center[1] },
+            { id: result.id + uuid(), title: result.text, longitude: result.center[0], latitude: result.center[1] },
             this.props.itinerarySequence.length
           );
         });
@@ -143,12 +144,12 @@ export class AuthoringComponent extends PureComponent<Props, State> {
       clearErrors,
       // eslint-disable-next-line
       addDestination: _,
-      parseCSVForBaseItinerary: dispatchParseCSVForBaseItinerary,
+      parseCSVForBaseItinerary,
       onRemoveDestination,
-      itineraryDestinationProperties: stopProperties,
-      addDestinationProperty: addStopProperty,
+      itineraryDestinationProperties,
+      addDestinationProperty,
       focusedDestinationID,
-      addDestinationImage: assignStopImage,
+      addDestinationImage,
       publishItinerary,
       output,
       geoJSONItinerary,
@@ -157,10 +158,10 @@ export class AuthoringComponent extends PureComponent<Props, State> {
       setTitle,
       setDescription,
       focusDestination,
-      showNearby: dispatchShowNearby,
+      showNearby,
       addPOI,
       removePOI,
-      doShowNearby: showNearby,
+      doShowNearby,
       nearbyPOIs,
       selectedPOIs,
       focalPoint
@@ -175,10 +176,10 @@ export class AuthoringComponent extends PureComponent<Props, State> {
           accessToken={process.env.REACT_APP_MAPBOX_API_KEY!}
           itineraryBounds={geoJSONItinerary.bounds}
           paths={geoJSONItinerary.paths as any}
-          stops={geoJSONItinerary.stops as any}
-          stopProperties={stopProperties}
+          destinations={geoJSONItinerary.stops as any}
+          destinationProperties={itineraryDestinationProperties}
           onMapCreated={map => this.onMapCreated(map)}
-          centerOnFocalPoint={showNearby}
+          centerOnFocalPoint={doShowNearby}
           focalPoint={focalPoint}
           pois={nearbyPOIs}
           selectedPois={selectedPOIs}
@@ -212,18 +213,18 @@ export class AuthoringComponent extends PureComponent<Props, State> {
                   <ListSubheader>Destinations</ListSubheader>
                   {itinerarySequence.map(id => {
                     const stop = itineraryStops[id];
-                    const properties = stopProperties[id];
+                    const properties = itineraryDestinationProperties[id];
                     return (
                       <ItineraryStopView
                         key={stop.id}
                         stop={stop}
                         properties={properties}
-                        onEdit={addStopProperty}
-                        onChooseImage={assignStopImage}
+                        onEdit={addDestinationProperty}
+                        onChooseImage={addDestinationImage}
                         imageURLs={imageSources}
                         onRemoveDestination={onRemoveDestination}
                         onHighlightDestination={id => {
-                          dispatchShowNearby(true);
+                          showNearby(true);
                         }}
                         expanded={focusedDestinationID === stop.id}
                         onChange={(_, focused) => focusDestination(stop.id, focused)}
@@ -252,7 +253,7 @@ export class AuthoringComponent extends PureComponent<Props, State> {
                   onChange={event => {
                     const files = event.target.files;
                     if (files && files.length > 0) {
-                      dispatchParseCSVForBaseItinerary(files[0]);
+                      parseCSVForBaseItinerary(files[0]);
                     }
                   }}
                   hidden

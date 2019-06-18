@@ -5,6 +5,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { FeatureCollection, bbox } from "@turf/turf";
 import { BBox2d } from "@turf/helpers/lib/geojson";
 import { DestinationWithProperties } from "../../authoring/data/AuthorState";
+import { transformRequest } from "../../utility/transformRequest";
 
 interface Props {
   accessToken: string;
@@ -79,7 +80,8 @@ export class DisplayMapContainer extends PureComponent<Props & React.HTMLAttribu
     if (container !== null) {
       const map = new mapboxgl.Map({
         container,
-        style: "mapbox://styles/mapbox/light-v9"
+        style: "mapbox://styles/mapbox/light-v9",
+        transformRequest
       });
       this.setupHoverInteraction(map);
       map.on("style.load", () => {

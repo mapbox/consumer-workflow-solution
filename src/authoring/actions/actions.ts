@@ -39,27 +39,27 @@ export const parseCSVForBaseItinerary = (file: Blob) => {
 };
 
 /// Associate a property with a stop
-export const addDestinationProperty = (stopId: string, key: string, value: any) => {
+export const addDestinationProperty = (destinationId: string, key: string, value: any) => {
   return {
     type: Actions.ADD_DESTINATION_PROPERTY,
-    id: stopId,
+    id: destinationId,
     key,
     value
   };
 };
 
-export const addDestinationPOI = (stopId: string, poi: POI) => {
+export const addDestinationPOI = (destinationId: string, poi: POI) => {
   return {
     type: Actions.ADD_DESTINATION_POI,
-    id: stopId,
+    id: destinationId,
     poi
   };
 };
 
-export const removeDestinationPOI = (stopId: string, poiId: string) => {
+export const removeDestinationPOI = (destinationId: string, poiId: string) => {
   return {
     type: Actions.REMOVE_DESTINATION_POI,
-    id: stopId,
+    id: destinationId,
     poiId
   };
 };
