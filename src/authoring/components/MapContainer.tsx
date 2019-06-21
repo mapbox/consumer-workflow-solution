@@ -8,6 +8,7 @@ import { distance } from "@turf/turf";
 import { remap } from "../../utility/math";
 import { POI } from "../data/POI";
 import { addEmptyGeoJSONSource } from "../../utility/addEmptyGeoJSONSource";
+import { transformRequest } from "../../utility/transformRequest";
 
 export interface Props {
   accessToken: string;
@@ -83,7 +84,8 @@ export class MapContainer extends PureComponent<Props & React.HTMLAttributes<HTM
     if (container !== null && searchContainer !== null) {
       const map = new mapboxgl.Map({
         container,
-        style: "mapbox://styles/mapbox/light-v9"
+        style: "mapbox://styles/mapbox/light-v9",
+        transformRequest
       });
 
       if (onMapCreated) {
