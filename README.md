@@ -56,7 +56,7 @@ All user interactions with the **Authoring** environment is captured via Redux. 
 
 ![InitialState](assets/DevTools1.png)
 
-The user is presented with multiple manual input options (Description, Length of Stay, Imagery) for manual input. Selecting `Find Things Nearby` will trigger a call to the Mapbox Tilequery API, which populates POIs around the location. These can be individually selected to add to the itinerary. Sample results are shown below:
+The user is presented with multiple manual input options (Description, Length of Stay, Imagery) for manual input. Selecting `Find Things Nearby` will trigger a call to the Mapbox Tilequery API, which populates POIs around the location. These can be individually selected to add to the itinerary. See sample visual results below:
 
 ![POIs](assets/POISelection.png)
 
@@ -82,6 +82,6 @@ The page will reload if you make edits. You will also see any lint errors in the
 
 ### `yarn run build`
 
-Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
+Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for optimal performance. The build is minified and the filenames include the hashes.
 
-For deployment to hosting providers, please see the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+For deployment to hosting providers, see Create React App's [deployment section](https://facebook.github.io/create-react-app/docs/deployment) for more information.
