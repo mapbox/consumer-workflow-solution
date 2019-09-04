@@ -47,6 +47,7 @@ export default class DisplayComponent extends PureComponent<Props, State> {
                 return (
                   <DestinationSidebarView
                     key={stop.id}
+                    duration={stop.lengthOfStay}
                     focused={focused}
                     name={stop.title}
                     onClick={() => {
