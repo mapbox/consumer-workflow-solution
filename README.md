@@ -1,6 +1,6 @@
 # Consumer Workflows: Itinerary Builder
 
-This repo contains the source code for the Mapbox Itinerary Builder. The core use-case is a fictional travel company looking to build an application for planning a vaction. This solution includes the following type of functionality:
+This repository contains the source code for the Mapbox Itinerary Builder. The core use-case is a fictional travel company looking to build an application for planning a vaction. This solution includes the following type of functionality:
 
 1. Authoring environment for building the itinerary and adding custom metadata like points of interest, descriptions, and imagery.
 2. Maps for visualizing stops and points-of-interest
@@ -18,7 +18,7 @@ This project has two main sections:
 
 [**Authoring**](src/authoring/components/Authoring.tsx). The authoring page presents a user interface for adding data to a map.
 
-[**Display**](src/display/components/Display.tsx). The display page shows the "published" data on a map with basic user interactions.
+[**Display**](src/display/components/Display.tsx). The display page shows the "published" data on a map and supports standard user interactions.
 
 ### Author Experience
 
@@ -36,19 +36,37 @@ Once `output` is populated, the `/display` route becomes available. This will re
 
 To use Mapbox services, you need to set your access token. You can get an access token from your [Mapbox account](https://account.mapbox.com/). If you don't have an account yet, you can sign up and get started for free.
 
-Once you have copied your token, you must set it in your environment. There are a number of ways to do this:
+Copy your token then set it in your environment, using one of the two methods below:
 
 1) Set the value of the `REACT_APP_MAPBOX_API_KEY` variable in [.env](./.env).
 2) Set the value of `REACT_APP_MAPBOX_API_KEY` as an environment variable in your terminal.
 
-Once your token is set:
+With the token set, run the following:
 
 ```bash
 yarn install
 yarn start
 ```
 
-This solution was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Please consult that project's documentation specific questions related to code organization, scripts, and deployments.
+This solution was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Consult that project's documentation specific questions related to code organization, scripts, and deployments.
+
+### Application State
+
+All user interactions with the **Authoring** environment is captured via Redux. Redux DevTools can help you track this data and the users individual interactions.
+
+![InitialState](assets/DevTools1.png)
+
+The user is presented with multiple manual input options (Description, Length of Stay, Imagery) for manual input. Selecting `Find Things Nearby` will trigger a call to the Mapbox Tilequery API, which populates POIs around the location. These can be individually selected to add to the itinerary. Sample results are shown below:
+
+![POIs](assets/POISelection.png)
+
+Redux will capture all POI metadata initially, but **Display** will only list out the POI Names.
+
+![POI2](assets/DevToolsPOI.png)
+
+Once annotations are completed, this information will be added into the `output` state for creation of the Display environment. This JSON representation can also be captured for external usage.
+
+![export](assets/Export.png)
 
 ## Available Scripts
 
