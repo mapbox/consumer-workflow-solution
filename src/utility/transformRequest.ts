@@ -7,7 +7,7 @@
 /// so we can continue to make and share sample projects.
 export const transformRequest = (url: string): { url: string } => {
   const hasQuery = url.indexOf("?") !== -1;
-  const suffix = hasQuery ? "&pluginName=consumer_workflow" : "?pluginName=consumer_workflow";
+  const suffix = hasQuery ? "&pluginName=ItineraryBuilder" : "?pluginName=ItineraryBuilder";
   return {
     url: url + suffix
   };
