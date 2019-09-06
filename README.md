@@ -1,6 +1,6 @@
 # Consumer Workflows: Itinerary Builder
 
-This repository contains the source code for the Mapbox Itinerary Builder. The core use-case is a fictional travel company looking to build an application for planning a vaction. This solution includes the following type of functionality:
+This repository contains the source code for the Mapbox Itinerary Builder. The core use-case is a fictional travel company looking to build an application for vacation planning. This solution includes the following functionality:
 
 1. Authoring environment for building the itinerary and adding custom metadata like points of interest, descriptions, and imagery.
 2. Maps for visualizing stops and points-of-interest
@@ -8,9 +8,9 @@ This repository contains the source code for the Mapbox Itinerary Builder. The c
 4. Search for points-of-interest, powered by Mapbox Tilequery API
 5. Display enviroment for publishing the completed itinerary
 
-This workflow contains sample data, but individual datasets can be dragged into the **Authoring** environment and edited at will.
+This workflow contains sample data, but individual datasets can be imported into the **Authoring** environment and edited at will.
 
-This workflow generates an interactive website with the completed itinerary, but this can be adapted to upload to external storage (such as S3 or any database) or generate a static image for print.
+This workflow generates an interactive website with the completed itinerary, but this can be adapted to upload to external storage (such as S3 or any database), save to a local file, or generate a static image for print.
 
 ## Organization
 
@@ -22,11 +22,11 @@ This project has two main sections:
 
 ### Author Experience
 
-When a user updates source data (via CSV) or metadata (in Authoring Environment), this dispatches events. These events can be tracked via the [Redux dev tools](https://github.com/reduxjs/redux-devtools).
+When a user updates source data (via CSV) or metadata (in Authoring Environment), this dispatches events that trigger [application state](src/authoring/data/AuthorState.ts) changes. These events can be tracked in the [Redux dev tools](https://github.com/reduxjs/redux-devtools).
 
-Async updates, such as geocoding and file loading, are handled through [Sagas](https://redux-saga.js.org/).
+Async updates, such as geocoding and file loading, are handled through [Sagas](https://redux-saga.js.org/). Sagas provide a runtime for generator functions to handle events, wait for asynchronous actions to complete, and dispatch new events with the results of those actions.
 
-Once the data has been updated, it can be exported into the **Display** environment. This is also handled via an event that populates the `output` object in Redux.
+Once the authoring data has been updated, it can be exported into the **Display** environment. This is handled via an event that populates the `output` property of the application state. `output` stores a read-friendly version of the edit-friendly authoring data.
 
 ### Display Experience
 
