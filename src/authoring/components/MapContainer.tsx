@@ -180,8 +180,8 @@ export class MapContainer extends PureComponent<Props & React.HTMLAttributes<HTM
 
   setupEditGui(map: mapboxgl.Map) {
     const { onPOISelected } = this.props;
-    map.on("mousedown", POI_LABELS_LAYER, e => {
-      const features = e.features;
+    const selectPOI = event => {
+      const features = event.features;
       if (features) {
         const feature = features[0];
         onPOISelected({
@@ -191,7 +191,9 @@ export class MapContainer extends PureComponent<Props & React.HTMLAttributes<HTM
           latitude: (feature.geometry as any).coordinates[1]
         });
       }
-    });
+    };
+    map.on("mousedown", POI_LABELS_LAYER, selectPOI);
+    map.on("mousedown", SELECTED_POI_LAYER, selectPOI);
   }
 
   setupHoverInteraction(map: mapboxgl.Map) {

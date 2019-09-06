@@ -12,7 +12,7 @@ import { parseCSVOrGeocodeLocations } from "../../utility/parseCSVOrGeocodeForLo
 export function* searchForPoisSaga(action) {
   const { tileset, lnglat } = action;
   const [lng, lat] = lnglat;
-  const query = `https://api.mapbox.com/v4/${tileset}/tilequery/${lng},${lat}.json?access_token=${
+  const query = `https://api.mapbox.com/v4/${tileset}/tilequery/${lng},${lat}.json?pluginName=ItineraryBuilder&access_token=${
     process.env.REACT_APP_MAPBOX_API_KEY
   }&radius=10000&geometry=point&layers=poi_label&limit=20`;
   const json = yield fetch(query).then(resp => resp.json());
